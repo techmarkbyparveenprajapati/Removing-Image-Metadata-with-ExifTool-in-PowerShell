@@ -1,0 +1,35 @@
+Get Metadata of Image
+
+# Specify the path to the ExifTool executable
+$exifToolPath = "EXIFTOOL_EXE_PATH"
+
+# Specify the path to the image file
+$imagePath = "IMAGE_PATH"
+
+# Build the ExifTool command
+$exifToolCommand = "$exifToolPath -json -n -g1 ""$imagePath"""
+
+# Execute the ExifTool command and capture the output
+$exifToolOutput = Invoke-Expression -Command $exifToolCommand
+
+# Convert the output from JSON to a PowerShell object
+$metadata = $exifToolOutput | ConvertFrom-Json
+
+# Display the metadata properties
+$metadata
+
+
+Clean Metadata of Image
+# Specify the path to the ExifTool executable
+$exifToolPath = "EXIFTOOL_EXE_PATH"
+
+# Specify the path to the image file
+$imagePath = "IMAGE_PATH"
+
+# Build the ExifTool command to remove all metadata
+$exifToolCommand = "$exifToolPath -all= ""$imagePath"""
+
+# Execute the ExifTool command
+Invoke-Expression -Command $exifToolCommand
+
+Write-Host "Metadata cleaned successfully."
